@@ -71,7 +71,7 @@ class TestMomentum:
 
     def test_eligibility_needs_all_six_months(self):
         """A missing month makes a share ineligible for six months."""
-        returns, values = self.make_panel()
+        returns, _values = self.make_panel()
         returns.loc[pd.Period('2020-03'), 'S05'] = np.nan
         eligible = LiquidUniverse(10, 6).eligible(returns)
         assert not eligible.loc[pd.Period('2020-08'), 'S05']
@@ -106,7 +106,7 @@ class TestMomentum:
 
     def test_formation_return_compounds(self):
         """Six months of 1% compound to 1.01**6 - 1."""
-        returns, values = self.make_panel()
+        returns, _values = self.make_panel()
         returns[:] = 0.01
         result = FormationReturns(6).compute(returns)
         assert abs(result.iloc[5, 0] - (1.01**6 - 1.0)) < 1e-12
@@ -114,7 +114,7 @@ class TestMomentum:
 
     def test_deciles_and_tie_break(self):
         """Deciles hold the extremes; ties go to the earlier symbol as loser."""
-        returns, values = self.make_panel()
+        returns, _values = self.make_panel()
         members = pd.DataFrame(
             True, index=returns.index, columns=returns.columns
         )
