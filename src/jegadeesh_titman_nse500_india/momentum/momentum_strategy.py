@@ -72,3 +72,26 @@ class MomentumStrategy:
             'losers': loser_weights,
             'buy_minus_sell': winner_weights - loser_weights,
         }
+
+    def next_winner_weights(
+        self,
+        monthly_returns: pd.DataFrame,
+        monthly_traded_values: pd.DataFrame,
+    ) -> pd.Series:
+        """Gives the winners portfolio to hold in the month after the data ends.
+
+        Args:
+            monthly_returns (pd.DataFrame): Returns, months by symbols, ending with the last full month.
+            monthly_traded_values (pd.DataFrame): Median traded values, same shape.
+
+        Returns:
+            pd.Series: Weights by symbol, summing to 1.
+
+        Raises:
+            ValueError: Fewer than K cohorts have been formed.
+        """
+        members = self.universe.members(monthly_returns, monthly_traded_values)
+        scores = self.formation.compute(monthly_returns)
+        _losers, winners = self.ranking.rank(scores, members)
+        cohorts = OverlappingCohorts(winners, self.holding_months)
+        return cohorts.next_period_weights(monthly_returns)

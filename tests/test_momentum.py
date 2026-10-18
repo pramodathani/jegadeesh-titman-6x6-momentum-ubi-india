@@ -144,3 +144,18 @@ class TestMomentum:
         assert np.allclose(result['buy_minus_sell'].sum(axis=1), 0.0)
         assert winners.iloc[:11].sum() == 0.0
         assert winners.iloc[11] > 0.0
+
+    def test_next_winner_weights_match_next_held_month(self):
+        """Weights for the month after the data equal a longer panel's weights."""
+        returns, values = self.make_panel(month_count=20)
+        strategy = MomentumStrategy(20, 6, 6)
+        next_weights = strategy.next_winner_weights(returns, values)
+        longer_returns, longer_values = self.make_panel(month_count=21)
+        held = strategy.weights(longer_returns, longer_values)['winners']
+        last_row = held.iloc[-1]
+        last_row = last_row[last_row > 0]
+        assert abs(next_weights.sum() - 1.0) < 1e-12
+        assert np.allclose(
+            next_weights.sort_index().to_numpy(),
+            last_row.sort_index().to_numpy(),
+        )
