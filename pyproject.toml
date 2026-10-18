@@ -1,0 +1,65 @@
+[build-system]
+requires = [
+    "hatchling>=1.27",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "jegadeesh-titman-nse500-india"
+version = "0.1.0"
+description = "Jegadeesh and Titman (1993) six-month/six-month momentum on the 500 most traded NSE shares, with UBI daily prices from December 2019 and Indian delivery costs."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = [
+    "LICENSE",
+]
+authors = [
+    { name = "Pramod Athani", email = "pramod.athani@gmail.com" },
+]
+keywords = [
+    "momentum",
+    "jegadeesh-titman",
+    "india",
+    "nse",
+    "quantitative-finance",
+    "backtesting",
+    "replication",
+]
+dependencies = [
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "pyarrow>=15.0",
+]
+
+[project.optional-dependencies]
+live = [
+    "tradingmachine @ git+https://github.com/pramodathani/tradingmachine.git",
+]
+test = [
+    "pytest>=8.0",
+]
+
+[project.urls]
+Repository = "https://github.com/pramodathani/jegadeesh-titman-momentum-nse500-india"
+Paper = "https://doi.org/10.1111/j.1540-6261.1993.tb04702.x"
+Library = "https://github.com/pramodathani/tradingmachine"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/jegadeesh_titman_nse500_india",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.format]
+quote-style = "single"
