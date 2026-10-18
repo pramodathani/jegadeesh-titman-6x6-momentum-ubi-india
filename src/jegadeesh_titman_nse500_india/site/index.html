@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Six-month momentum on liquid NSE shares: a short reproduction of Jegadeesh and Titman (1993)</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
+</head>
+<body>
+<main>
+<h1>Six-month momentum on liquid NSE shares: a short reproduction of Jegadeesh and Titman (1993)</h1>
+<p class="authors"><strong>Pramod Athani</strong></p>
+<p class="line"><a href="mailto:pramod.athani@gmail.com">pramod.athani@gmail.com</a> · <a href="https://orcid.org/0009-0002-0270-7045">ORCID 0009-0002-0270-7045</a> · <a href="https://papers.ssrn.com/sol3/cf_dev/AbsByAuth.cfm?per_id=13497529">SSRN 13497529</a> · <a href="https://www.linkedin.com/in/pramod-athani-b65b922a/">LinkedIn</a></p>
+
+<div class="notice">This is a short reproduction of one strategy from the paper, made on UBI data from December 2019 as a test of research-agent. It is not a full replication.</div>
+
+<div class="abstract">
+<p><strong>Abstract.</strong> We reproduce one row of Jegadeesh and Titman's Table I: rank shares on the past six months, hold for six months, no skip. The universe is the 500 most traded NSE shares and the data are UBI daily prices, so the holding months run from December 2020 to September 2026 (<span id="n-periods"></span> months). Buying the winners and selling the losers earned 1.23% a month before costs and 1.08% after Indian delivery costs, close to the paper's 0.95%. The sample is short, prices exclude dividends, and the short leg cannot be traded in most NSE cash shares.</p>
+<p><strong>Keywords:</strong> momentum, NSE, India, Jegadeesh and Titman. <strong>JEL:</strong> G11, G12, G14.</p>
+</div>
+
+<div class="citation"><span id="cite-text">Athani, P. (2026). Six-month momentum on liquid NSE shares: a short reproduction of Jegadeesh and Titman (1993). https://github.com/pramodathani/jegadeesh-titman-6x6-momentum-ubi-india</span><br><button onclick="copyCitation()">Copy</button></div>
+
+<h2>1. Table I, J=6 K=6</h2>
+<table>
+<caption>Table 1. Average monthly return (Newey-West t-statistic, 5 lags). Paper: US, 1965–89, 300 months, Table I p. 70. India: Dec 2020 – Sep 2026.</caption>
+<thead><tr><th>Portfolio</th><th>Paper</th><th>India, before costs</th><th>India, after costs</th><th>Worst drawdown, before</th><th>Worst drawdown, after</th></tr></thead>
+<tbody id="table-body"></tbody>
+</table>
+<p class="caption">Costs are brahmagupta's NSE delivery costs with 0.1% market impact per side. The sell portfolio was not run with costs. Buy − sell is a paper portfolio.</p>
+
+<h2>2. Winners against the NIFTY 500</h2>
+<div id="chart"></div>
+<p class="caption">Figure 1. Growth of one rupee in the winners decile after costs, against the NIFTY 500 price index. The winners compound at <span id="winners-cagr"></span> a year against <span id="bench-cagr"></span> for the index, with a worst drawdown of <span id="winners-dd"></span> and a beta of about 1.24.</p>
+
+<h2>3. Caveats</h2>
+<ul>
+<li>The sample is 70 months in a strong market for Indian mid and small caps, against 300 months for the paper.</li>
+<li>UBI lists today's shares only, so shares delisted or renamed after December 2019 are missing.</li>
+<li>Prices are adjusted for splits and bonuses, not dividends, for both shares and index.</li>
+<li>Most NSE cash shares cannot be shorted overnight, and no borrowing fee is charged, so buy − sell is a paper portfolio.</li>
+<li>No daily candles exist for any share from 2022-02-15 to 2022-03-07, which inflates March 2022. Without that month buy − sell is 1.11% a month.</li>
+<li>Over thirds of the sample, buy − sell fades: 1.24%, 1.41%, 1.04% a month, and the last third has a t-statistic of 1.31.</li>
+<li>Four planned variants were run as six backtests. Nothing was tuned. An independent review accepted the work with these caveats.</li>
+</ul>
+
+<h2>Declarations</h2>
+<p><strong>Conflicts of interest.</strong> The author may hold positions in securities mentioned. This is not investment advice.</p>
+<p><strong>Data and code availability.</strong> Code, tests and result tables are in the repository linked above. Raw exchange data is not redistributed.</p>
+<p><strong>Funding.</strong> None.</p>
+
+<h2>References</h2>
+<p>Jegadeesh, N. and Titman, S. (1993). Returns to buying winners and selling losers: implications for stock market efficiency. <em>The Journal of Finance</em>, 48(1), 65–91.</p>
+<footer>Made with research-agent as a test. Prices from UBI through tradingmachine.</footer>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

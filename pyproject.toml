@@ -32,6 +32,9 @@ dependencies = [
     "pyarrow>=15.0",
 ]
 
+[project.scripts]
+jt-6x6-site = "jegadeesh_titman_nse500_india.site_server:main"
+
 [project.optional-dependencies]
 live = [
     "tradingmachine @ git+https://github.com/pramodathani/tradingmachine.git",
