@@ -45,3 +45,15 @@ Winners only, after costs, beat the NIFTY 500 by 16.5% a year (t of the monthly 
 - The short leg cannot be traded for most NSE cash shares; buy − sell is a paper portfolio, and its short side is costed as delivery.
 - Trading is assumed at the close of the formation month.
 - The backtest_reviewer subagent ran out of steps before returning a report. Its partial remark was that fragility checks had been run and the CUPID split was under examination. I ran the checks above myself instead: contributor concentration, subperiods, year by year and the series names in the universe (two hyphenated names, BAJAJ-AUTO and NAM-INDIA, are real shares). This is not an independent review. Say whether you want it rerun.
+
+## Independent review (backtest_reviewer, full text in results/review/review.md)
+
+Verdict: **accept with caveats**. The headline numbers recompute exactly from the weights and returns (winners 2.492%, losers 1.264%, buy − sell 1.228% a month, NW t 3.06). No look-ahead and no code error was found; the 10 tests pass. Nothing was changed in the backtest, so the numbers above stand. Findings, most serious first:
+
+1. **Data hole of 22 days across the whole market.** No share has candles from 2022-02-15 to 2022-03-07, while the NIFTY 500 has them. Two weeks of February returns fall into March 2022 (+9.3%, the third-best month), and the benchmark months are misaligned. Without March 2022, buy − sell is 1.11% a month (t 2.75). Recorded as a new gap in the shared register.
+2. **Unadjusted splits missed by the −50% cut** on five days (BHARATRAS, GPIL, MAANALU, NAZARA, POWERMECH, at −45% to −50%). Net effect on buy − sell is −0.016% a month, so it is conservative.
+3. **Demergers (PEL, RAYMOND) in the short leg** flatter buy − sell by about 0.005% a month.
+4. **Fragile over time.** By thirds: 1.24% (t 3.17), 1.41% (t 1.87), 1.04% (t 1.31). Without the best three months: 0.78% (t 2.37).
+5. **No stock-borrowing fee** in the cost model. The reviewer's assumed 3–5% a year would take another 0.25–0.4% a month; the short leg is a paper position anyway.
+6. **Survivorship and renames** cannot be measured from this data; direction unclear.
+7. At double impact (0.2% per side) buy − sell earns 1.01% a month after costs (t 2.52).
