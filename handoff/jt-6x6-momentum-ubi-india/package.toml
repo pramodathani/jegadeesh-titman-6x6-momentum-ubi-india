@@ -1,0 +1,4 @@
+[package]
+name = "jt-6x6-momentum-ubi-india"
+description = "Long-only six-month winners decile of the 500 most traded NSE shares, from the Jegadeesh and Titman (1993) six-month momentum test reproduction on UBI data"
+version = "2026.10.18"
