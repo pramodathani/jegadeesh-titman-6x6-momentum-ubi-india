@@ -1,8 +1,8 @@
 {
   "inputs": {
-    "returns": "/home/pramod/Projects/research-agent/workspace/projects/phase5-check/data/monthly_returns.parquet",
-    "weights": "/home/pramod/Projects/research-agent/workspace/projects/phase5-check/data/weights_losers.parquet",
-    "benchmark": "/home/pramod/Projects/research-agent/workspace/projects/phase5-check/data/benchmark_returns.parquet",
+    "returns": "data/monthly_returns.parquet",
+    "weights": "data/weights_losers.parquet",
+    "benchmark": "data/benchmark_returns.parquet",
     "periods_per_year": 12
   },
   "cost_model": {
